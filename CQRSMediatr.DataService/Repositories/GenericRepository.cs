@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CQRSMediatr.DataService.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public abstract class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         protected readonly ILogger _logger;
         private readonly AppDbContext _context;

@@ -7,6 +7,6 @@ namespace CQRSMediatr.DataService.Repositories.Interfaces
 
         IAchievementRepository AchievementRepository { get; }
 
-        Task CompleteAsync();
+        Task<bool> CompleteAsync();
     }
 }
