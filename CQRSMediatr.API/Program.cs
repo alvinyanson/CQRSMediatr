@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using CQRSMediatr.DataService.Data;
+using CQRSMediatr.DataService.Repositories.Interfaces;
+using CQRSMediatr.DataService.Repositories;
+using CQRSMediatr.API.Profiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,11 +13,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// mapster
+builder.Services.RegisterMapsterConfiguration();
 
+// connection string
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
+// initialize db context in DI Container
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 

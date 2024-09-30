@@ -3,9 +3,9 @@ namespace CQRSMediatr.DataService.Repositories.Interfaces
 {
     public interface IUnitOfWork
     {
-        IDriverRepository DriverRepository { get; }
+        IDriverRepository Drivers { get; }
 
-        IAchievementRepository AchievementRepository { get; }
+        IAchievementRepository Achievements { get; }
 
         Task<bool> CompleteAsync();
     }

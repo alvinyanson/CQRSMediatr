@@ -5,7 +5,7 @@ namespace CQRSMediatr.DataService.Repositories.Interfaces
     {
         Task<IEnumerable<T>> All();
         
-        Task<T?> GetById(int id);
+        Task<T?> GetById(Guid id);
         
         Task<bool> Add(T entity);
         

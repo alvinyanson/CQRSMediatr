@@ -9,9 +9,9 @@ namespace CQRSMediatr.DataService.Repositories
     {
         private readonly AppDbContext _context;
 
-        public IDriverRepository DriverRepository { get; }
+        public IDriverRepository Drivers { get; }
 
-        public IAchievementRepository AchievementRepository { get; }
+        public IAchievementRepository Achievements { get; }
 
         public UnitOfWork(AppDbContext context, ILoggerFactory loggerFactory)
         {
@@ -19,8 +19,8 @@ namespace CQRSMediatr.DataService.Repositories
 
             var logger = loggerFactory.CreateLogger("logs");
 
-            DriverRepository = new DriverRepository(logger, context);
-            AchievementRepository = new AchievementsRepository(logger, context);
+            Drivers = new DriverRepository(logger, context);
+            Achievements = new AchievementsRepository(logger, context);
         }
 
         public async Task<bool> CompleteAsync()

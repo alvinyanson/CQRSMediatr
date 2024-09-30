@@ -40,7 +40,7 @@ namespace CQRSMediatr.DataService.Repositories
             throw new NotImplementedException();
         }
 
-        public virtual async Task<T?> GetById(int id)
+        public virtual async Task<T?> GetById(Guid id)
         {
             return await _dbSet.FindAsync(id);
         }
