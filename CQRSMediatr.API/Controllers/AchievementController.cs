@@ -3,14 +3,16 @@ using CQRSMediatr.Entities.DbSet;
 using CQRSMediatr.Entities.DTOs.Requests;
 using CQRSMediatr.Entities.DTOs.Responses;
 using Mapster;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CQRSMediatr.API.Controllers
 {
     public class AchievementController : BaseController
     {
-
-        public AchievementController(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public AchievementController(
+            IUnitOfWork unitOfWork, 
+            IMediator mediator) : base(unitOfWork, mediator)
         {
 
         }

@@ -1,30 +1,31 @@
-﻿using CQRSMediatr.DataService.Repositories.Interfaces;
-using CQRSMediatr.Entities.DbSet;
+﻿using CQRSMediatr.API.Commands;
+using CQRSMediatr.API.Queries;
+using CQRSMediatr.DataService.Repositories.Interfaces;
 using CQRSMediatr.Entities.DTOs.Requests;
-using CQRSMediatr.Entities.DTOs.Responses;
-using Mapster;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CQRSMediatr.API.Controllers
 {
     public class DriversController : BaseController
     {
-        public DriversController(IUnitOfWork unitOfWork) : base(unitOfWork)
+        public DriversController(
+            IUnitOfWork unitOfWork,
+            IMediator mediator
+            ) : base(unitOfWork, mediator)
         {
-
-
         }
 
         [HttpGet]
         [Route("{driverId:Guid}")]
         public async Task<IActionResult> GetDriver(Guid driverId)
         {
-            var driver = await _unitOfWork.Drivers.GetById(driverId);
+            var query = new GetDriverQuery(driverId);
 
-            if (driver == null)
+            var result = await _mediator.Send(query);
+
+            if (result == null)
                 return NotFound();
-
-            var result = driver.Adapt<GetDriverResponse>();
 
             return Ok(result);
         }
@@ -32,9 +33,10 @@ namespace CQRSMediatr.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllDrivers()
         {
-            var drivers = await _unitOfWork.Drivers.All();
+            // specify the query that I have for this endpoint
+            var query = new GetAllDriversQuery();
 
-            var result = drivers.Adapt<IEnumerable<GetDriverResponse>>();
+            var result = await _mediator.Send(query);
 
             return Ok(result);
         }
@@ -45,13 +47,11 @@ namespace CQRSMediatr.API.Controllers
             if(!ModelState.IsValid)
                 return BadRequest();
 
-            var result = driver.Adapt<Driver>();
+            var command = new CreateDriverInfoRequest(driver);
 
-            await _unitOfWork.Drivers.Add(result);
+            var result = await _mediator.Send(command);
 
-            await _unitOfWork.CompleteAsync();
-
-            return CreatedAtAction(nameof(GetDriver), new { driverId = result.Id }, result);
+            return CreatedAtAction(nameof(GetDriver), new { driverId = result.DriverId }, result);
         }
 
         [HttpPut]
@@ -60,11 +60,12 @@ namespace CQRSMediatr.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            var result = driver.Adapt<Driver>();
+            var command = new UpdateDriverInfoRequest(driver);
 
-            await _unitOfWork.Drivers.Update(result);
+            var result = await _mediator.Send(command);
 
-            await _unitOfWork.CompleteAsync();
+            if(!result)
+                return BadRequest();
 
             return NoContent();
         }
@@ -72,14 +73,12 @@ namespace CQRSMediatr.API.Controllers
         [HttpDelete("{driverId:Guid}")]
         public async Task<IActionResult> DeleteDriver(Guid driverId)
         {
-            var driver = await _unitOfWork.Drivers.GetById(driverId);
+            var command = new DeleteDriverInfoRequest(driverId);
 
-            if (driver == null)
-                return NotFound();
+            var result = await _mediator.Send(command);
 
-            await _unitOfWork.Drivers.Delete(driverId);
-
-            await _unitOfWork.CompleteAsync();
+            if(!result)
+                return BadRequest();
 
             return NoContent();
         }
