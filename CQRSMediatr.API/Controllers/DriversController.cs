@@ -34,7 +34,7 @@ namespace CQRSMediatr.API.Controllers
         {
             var drivers = await _unitOfWork.Drivers.All();
 
-            var result = drivers.Adapt<IEnumerable<GetDriverResponse>>();
+            var result = drivers.Adapt<IEnumerable<GetDriverResponse>>().ToList();
 
             return Ok(result);
         }

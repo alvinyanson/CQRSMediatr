@@ -22,7 +22,7 @@ namespace CQRSMediatr.API.Controllers
             var driverAchievements = await _unitOfWork.Achievements.GetDriverAchievementAsync(driverId);
 
             if(driverAchievements == null)
-                return NotFound("Achievements not found.");
+                return NotFound();
 
             var result = driverAchievements.Adapt<DriverAchievementResponse>();
 

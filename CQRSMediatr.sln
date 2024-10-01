@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRSMediatr.API", "CQRSMediatr.API\CQRSMediatr.API.csproj", "{B5C5DE77-76E9-46C4-92ED-727941723CF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CQRSMediatr.API", "CQRSMediatr.API\CQRSMediatr.API.csproj", "{B5C5DE77-76E9-46C4-92ED-727941723CF6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRSMediatr.Entities", "CQRSMediatr.Entities\CQRSMediatr.Entities.csproj", "{97263F8B-3C8A-43CD-A58B-2A8D345E97AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CQRSMediatr.Entities", "CQRSMediatr.Entities\CQRSMediatr.Entities.csproj", "{97263F8B-3C8A-43CD-A58B-2A8D345E97AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRSMediatr.DataService", "CQRSMediatr.DataService\CQRSMediatr.DataService.csproj", "{7FD7E5E2-494A-48A3-8E03-59CA40F1B198}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CQRSMediatr.DataService", "CQRSMediatr.DataService\CQRSMediatr.DataService.csproj", "{7FD7E5E2-494A-48A3-8E03-59CA40F1B198}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormulaOneApi.Tests", "FormulaOneApi.Tests\FormulaOneApi.Tests.csproj", "{B2E602FA-1F32-4189-AF5B-51F1E0727AE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{7FD7E5E2-494A-48A3-8E03-59CA40F1B198}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FD7E5E2-494A-48A3-8E03-59CA40F1B198}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FD7E5E2-494A-48A3-8E03-59CA40F1B198}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2E602FA-1F32-4189-AF5B-51F1E0727AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2E602FA-1F32-4189-AF5B-51F1E0727AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2E602FA-1F32-4189-AF5B-51F1E0727AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2E602FA-1F32-4189-AF5B-51F1E0727AE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
