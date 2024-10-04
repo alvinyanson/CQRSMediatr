@@ -1,5 +1,6 @@
 ﻿
 using AutoFixture;
+using AutoFixture.AutoMoq;
 using CQRSMediatr.API.Controllers;
 using CQRSMediatr.DataService.Repositories.Interfaces;
 using CQRSMediatr.Entities.DbSet;
@@ -27,7 +28,12 @@ namespace FormulaOneApiUsingMoq.Tests.Controllers
             .ForEach(behavior => _fixture.Behaviors.Remove(behavior));
             _fixture.Behaviors.Add(new OmitOnRecursionBehavior());
 
-            _unitOfWorkMock = new Mock<IUnitOfWork>();
+            // with Moq only
+            //_unitOfWorkMock = new Mock<IUnitOfWork>();
+
+            // with AutoFixture.AutoMoq
+            _fixture.Customize(new AutoMoqCustomization());
+            _unitOfWorkMock = _fixture.Create<Mock<IUnitOfWork>>();
         }
 
 
@@ -62,7 +68,11 @@ namespace FormulaOneApiUsingMoq.Tests.Controllers
                     .GetById(It.IsAny<Guid>()))
                 .ReturnsAsync(driver);
 
-            _controller = new DriversController(_unitOfWorkMock.Object);
+            // with MOQ only
+            //_controller = new DriversController(_unitOfWorkMock.Object);
+
+            // with AutoFixture.AutoMoq
+            _controller = _fixture.Create<Mock<DriversController>>().Object;
 
             var result = await _controller.GetDriver(driverId);
 
