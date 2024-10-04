@@ -15,6 +15,11 @@ namespace CQRSMediatr.API.Controllers
 
         }
 
+        [HttpGet("TestConnection")]
+        public IActionResult TestConnection() {
+            return Ok("Connection is OK");
+        }
+
 
         [HttpGet("{driverId:Guid}")]
         public async Task<IActionResult> GetDriverAchievements(Guid driverId)

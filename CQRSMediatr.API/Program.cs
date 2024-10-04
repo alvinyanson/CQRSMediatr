@@ -26,6 +26,8 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 
+PrepDB.PrepPopulation(app, builder.Environment.IsProduction());
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
