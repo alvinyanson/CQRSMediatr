@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+ name: formula-one-depl
+spec:
+ replicas: 1
+ selector:
+  matchLabels:
+   app: formula-one-service
+ template:
+  metadata:
+   labels:
+    app: formula-one-service
+  spec:
+   containers:
+    - name: formula-one-service
+      image: ayansonarcanys/formula-one-api:latest
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: formula-one-loadbalancer
+spec:
+  type: LoadBalancer
+  selector:
+    app: formula-one-service
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
